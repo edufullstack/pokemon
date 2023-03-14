@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     'pokemon',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         unique: true,
         primaryKey: true,
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      life: {
+      hp: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {

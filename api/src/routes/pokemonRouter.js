@@ -3,24 +3,28 @@
 
 const express = require('express')
 const router = express.Router()
-const { getAllPokemons, findPokemon } = require('../controllers/index')
+const {
+  getAllPokemons,
+  findPokemon,
+  postPokemon,
+  findPokemonByNameDb,
+} = require('../controllers/index')
 
-// aqui es / nada mas y los metodos
-// tambien llevan async await
 router.get('/', async (req, res) => {
   try {
-    let allPokemons = await getAllPokemons()
-    res.status(200).json(allPokemons)
-  } catch (error) {
-    res.status(404).send(error.message)
+    let { name } = req.query
+    if (name) {
+      let pokeByName = await findPokemonByNameDb(name)
+      res.status(200).send(pokeByName)
+    } else {
+      let pokemons = await getAllPokemons()
+      res.status(200).send(pokemons)
+    }
+  } catch (err) {
+    res.status(400).send(err.message)
   }
 })
 
-// 📍 GET | /pokemons/:idPokemon
-// Esta ruta obtiene el detalle de un pokemon específico. Es decir que devuelve un objeto con la información pedida en el detalle de un pokemon.
-// El pokemon es recibido por parámetro (ID).
-// Tiene que incluir los datos del tipo de pokemon al que está asociado.
-// Debe funcionar tanto para los pokemones de la API como para los de la base de datos.
 router.get('/:idPokemon', async (req, res) => {
   try {
     const { idPokemon } = req.params
@@ -31,23 +35,21 @@ router.get('/:idPokemon', async (req, res) => {
   }
 })
 
-// 📍 GET | /pokemons/name?="..."
-// Esta ruta debe obtener todos aquellos pokemons que coinciden con el nombre recibido por query.
-// Debe poder buscarlo independientemente de mayúsculas o minúsculas.
-// Si no existe el pokemon, debe mostrar un mensaje adecuado.
-// Debe buscar tanto los de la API como los de la base de datos.
-router.get('/', async (req, res) => {
-  try {
-    const { name } = req.query
-  } catch (error) {}
-})
-
 // 📍 POST | /pokemons
 // Esta ruta recibirá todos los datos necesarios para crear un pokemon y relacionarlo con sus tipos solicitados.
 // Toda la información debe ser recibida por body.
 // Debe crear un pokemon en la base de datos, y este debe estar relacionado con sus tipos indicados (al menos uno).
 
 router.post('/', async (req, res) => {
-  const { id, name, image, life, attack, defense, img, type } = req.body
+  let { name, hp, attack, defense, speed, height, weight, types } = req.body
+  try {
+    if (!name || !hp || !attack || !defense || !types) {
+      throw new Error('Please complete the required information.')
+    }
+    postPokemon(name, hp, attack, defense, speed, height, weight, types)
+    res.status(200).send(`Pokemon ${name} created successfully!`)
+  } catch (error) {
+    return { error: error.message }
+  }
 })
 module.exports = router

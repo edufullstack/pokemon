@@ -1,0 +1,4 @@
+.card {
+  width: 23%; /* esto establece el ancho máximo de cada tarjeta en la línea */
+  margin-bottom: 1.5rem; /* esto establece un margen inferior para cada tarjeta */
+}

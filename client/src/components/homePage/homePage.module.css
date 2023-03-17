@@ -1,0 +1,7 @@
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: auto; /* esto es opcional y establece el ancho máximo del contenedor */
+  margin: 0 auto; /* esto es opcional y centra el contenedor horizontalmente */
+}

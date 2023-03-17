@@ -8,6 +8,7 @@ const {
   findPokemon,
   postPokemon,
   findPokemonByNameDb,
+  getAllPokemonsDb,
 } = require('../controllers/index')
 
 router.get('/', async (req, res) => {
@@ -17,8 +18,9 @@ router.get('/', async (req, res) => {
       let pokeByName = await findPokemonByNameDb(name)
       res.status(200).send(pokeByName)
     } else {
+      let pokemonsDb = await getAllPokemonsDb()
       let pokemons = await getAllPokemons()
-      res.status(200).send(pokemons)
+      res.status(200).send([...pokemons, ...pokemonsDb])
     }
   } catch (err) {
     res.status(400).send(err.message)

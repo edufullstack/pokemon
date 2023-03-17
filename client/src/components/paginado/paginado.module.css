@@ -1,0 +1,5 @@
+.paginado {
+  display: flex;
+  list-style: none;
+  justify-content: center; /* esto es opcional y centrará los elementos horizontalmente */
+}

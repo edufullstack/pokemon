@@ -9,31 +9,15 @@ import NavBar from './components/nav/NavBar'
 
 function App() {
   const location = useLocation()
-  // const onSearch = (character) => {
-  //   fetch(`https://rickandmortyapi.com/api/character/${character}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.name) {
-  //         for (let character of characters) {
-  //           if (data.id === character.id) {
-  //             return window.alert('Ya tienes ese personaje')
-  //           }
-  //         }
-  //         setCharacters((oldChars) => [...oldChars, data])
-  //       } else {
-  //         window.alert('No hay personajes con ese ID')
-  //       }
-  //     })
-  // }
 
   return (
     <div className='App'>
       {location.pathname === '/' ? <LandingPage /> : <NavBar />}
 
-      <Route exact path='/home' component={HomePage} />
-      <Route exact path='/detail' component={DetailPage} />
-      <Route exact path='/form' component={Form} />
-      <Route exact path='/about' component={About} />
+      <Route path='/home' component={HomePage} />
+      <Route path='/create' component={Form} />
+      <Route path='/about' component={About} />
+      <Route path='/detail/:detail' component={DetailPage} />
     </div>
   )
 }

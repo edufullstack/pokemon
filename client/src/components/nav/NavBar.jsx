@@ -1,23 +1,29 @@
-import './navBar.module.css'
+import styles from './navBar.module.css'
 import { Link } from 'react-router-dom'
-import SearchBar from '../searchBar/SearchBar'
+import { useDispatch } from 'react-redux'
+import { resetPokemonsHome } from '../redux/actions'
 
-const NavBar = ({ onSearch }) => {
+const NavBar = () => {
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(resetPokemonsHome())
+  }
+
   return (
-    <div>
+    <div className={styles.navBody}>
       <Link to='/'>
         <button>Logout</button>
       </Link>
       <Link to='/home'>
-        <button>Home</button>
+        <button onClick={() => handleClick()}>Home</button>
+      </Link>
+      <Link to='/create'>
+        <button>Create your Pokemon</button>
       </Link>
       <Link to='/about'>
         <button>About</button>
       </Link>
-      <Link to='/form'>
-        <button>Form</button>
-      </Link>
-      <SearchBar onSearch={onSearch} />
     </div>
   )
 }

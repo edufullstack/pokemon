@@ -1,22 +1,43 @@
-import './searchBar.module.css'
+import styles from './searchBar.module.css'
 import { useDispatch } from 'react-redux'
+import { useState } from 'react'
+import { searchPokemon } from '../redux/actions'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
-  const handleInputChange = () => {}
+  const [name, setName] = useState('')
+
+  const handleInputChange = (event) => {
+    event.preventDefault()
+    setName(event.target.value)
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    dispatch(searchPokemon(name))
+    setName('')
+  }
+
+  function handleKeyDown(event) {
+    if (event.keyCode === 13) {
+      // 13 es el código para la tecla "Enter"
+      handleSubmit(event)
+    }
+  }
+
   return (
-    <div>
+    <div className={styles.searchContainer}>
       <input
-        // className={}
-        type='search'
-        // value={}
-        onChange={handleInputChange}
+        className={styles.searchInput}
+        type='text'
+        placeholder='Search by name...'
+        onChange={(event) => handleInputChange(event)}
+        onKeyDown={(event) => handleKeyDown(event)}
+        value={name}
       />
       <button
-        // className={}
-        onClick={() => {
-          // onSearch(character)
-        }}
+        type='submit'
+        className={styles.searchButton}
+        onClick={(event) => handleSubmit(event)}
       >
         Search
       </button>

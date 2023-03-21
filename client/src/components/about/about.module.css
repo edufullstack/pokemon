@@ -1,9 +1,55 @@
-.about {
-  background-image: url(https://aniyuki.com/wp-content/uploads/2022/03/aniyuki-pokemon-9.gif);
+.aboutBody {
+  background-image: url(https://images2.alphacoders.com/967/thumb-1920-967747.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
   background-attachment: fixed;
   margin: 0;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 87vh;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cardImg {
+  width: 30%;
+  height: auto;
+  padding: 20px;
+}
+
+.cardBody {
+  width: 60%;
+  padding: 20px;
+}
+
+.cardBody p {
+  margin-bottom: 10px;
+  background-color: black;
+  font-size: larger;
+}
+.cardButton {
+  margin-left: 10px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: 19px;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  border-radius: 10%;
+}
+
+.cardButton button:hover {
+  text-decoration: underline;
 }

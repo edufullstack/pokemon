@@ -1,4 +1,29 @@
 .card {
-  width: 23%; /* esto establece el ancho máximo de cada tarjeta en la línea */
+  width: 18rem; /* esto establece el ancho máximo de cada tarjeta en la línea */
   margin-bottom: 1.5rem; /* esto establece un margen inferior para cada tarjeta */
+  margin-right: 2%; /* esto establece un margen derecho para las primeras tres tarjetas de cada fila */
+  box-sizing: border-box; /* esto evita que los bordes agreguen más ancho a la tarjeta */
+  border: 1px solid rgb(255, 255, 255);
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:nth-child(4n) {
+  margin-right: 0; /* esto elimina el margen derecho de la última tarjeta de cada fila */
+}
+
+.card img {
+  width: 100%; /* esto establece el ancho máximo de la imagen dentro de la tarjeta */
+  height: 200px; /* esto establece una altura fija para la imagen dentro de la tarjeta */
+  object-fit: contain; /* esto hace que la imagen se ajuste dentro de la tarjeta sin distorsionarla */
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px 2px rgb(248, 47, 47);
+}
+.card h4,
+h2 {
+  color: #ffffff; /* esto establece el color de las letras del h4 */
 }

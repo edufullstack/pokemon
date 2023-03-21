@@ -1,7 +1,117 @@
+.homeBody {
+  background-image: url(https://images2.alphacoders.com/967/thumb-1920-967747.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 20px;
+}
+
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: auto; /* esto es opcional y establece el ancho máximo del contenedor */
-  margin: 0 auto; /* esto es opcional y centra el contenedor horizontalmente */
+  justify-content: center;
+  max-width: auto;
+  margin: 0 auto;
+  min-height: 400px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  justify-items: center;
+}
+
+.homeBody div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.homeBody select {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #fff;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.homeBody select:hover {
+  background-color: #f2f2f2;
+}
+
+.homeBody select:focus {
+  outline: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.paginado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.paginado button {
+  margin: 0 10px;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.paginado button:hover {
+  background-color: #f0fd37;
+}
+
+.paginado button:focus {
+  outline: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.errorTitle {
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: red;
+  text-shadow: 1px 1px #000;
+}
+
+.errorText {
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px #000;
 }

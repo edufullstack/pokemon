@@ -1,0 +1,88 @@
+.formBody {
+  background-image: url(https://images2.alphacoders.com/967/thumb-1920-967747.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  margin: 0px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formBody h1 {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #333;
+  letter-spacing: 2px;
+}
+
+.formBody label {
+  background-color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 1px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.formBody input[type='text'],
+.formBody input[type='number'],
+.formBody select {
+  width: 10rem;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.formBody button[type='submit'] {
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type='submit']:not(:disabled) {
+  color: #fff;
+  background-color: #333;
+}
+button[type='submit']:disabled {
+  color: #999;
+  background-color: #ccc;
+}
+.formBody p {
+  margin: 5px 0 0 0;
+  color: rgb(230, 6, 6);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.types {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.types button {
+  margin-right: 10px;
+}
+
+.types p {
+  margin: 0;
+  color: rgb(26, 157, 238);
+  font-weight: bold;
+  background-color: rgb(255, 234, 196);
+  border: 6px solid #000351;
+}

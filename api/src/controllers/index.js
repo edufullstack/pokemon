@@ -5,7 +5,7 @@ const axios = require('axios')
 const getAllPokemons = async () => {
   let i = 1
   let pokemons = []
-  while (i < 60) {
+  while (i < 40) {
     let dataApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
     pokemons.push(dataApi)
     i++
@@ -25,28 +25,6 @@ const getAllPokemons = async () => {
     }
   })
   return pokemons
-  // let arrayPokemons = []
-  // const pokemonFirstTwenty = await axios('https://pokeapi.co/api/v2/pokemon')
-  // const pokemonNextTwenty = await axios(pokemonFirstTwenty.data.next)
-  // const pokemonURLS = pokemonFirstTwenty.data.results.map((p) => p.url)
-  // const pokemonURLSN = pokemonNextTwenty.data.results.map((p) => p.url)
-  // const allURLS = pokemonURLS.concat(pokemonURLSN)
-  // for (i = 0; i < allURLS.length; i++) {
-  //   const results = await axios(allURLS[i])
-  //   arrayPokemons.push({
-  //     id: results.data.id,
-  //     name: results.data.name,
-  //     hp: results.data.stats[0].base_stat,
-  //     attack: results.data.stats[1].base_stat,
-  //     defense: results.data.stats[2].base_stat,
-  //     image: results.data.sprites.other.home.front_default,
-  //     types: results.data.types.map((el) => el.type.name),
-  //     speed: results.data.stats[5].base_stat,
-  //     height: results.data.height,
-  //     weight: results.data.weight,
-  //   })
-  // }
-  // return arrayPokemons
 }
 
 const getAllPokemonsDb = async () => {
@@ -77,20 +55,36 @@ const getAllPokemonsDb = async () => {
 }
 
 const findPokemon = async (id) => {
-  let pokeById = await Pokemon.findAll({
-    where: {
-      id: id,
-    },
-    include: {
-      model: Type,
-      attributes: ['name'],
-      through: {
-        attributes: [],
+  let pokeById
+  if (isNaN(id)) {
+    pokeById = await Pokemon.findAll({
+      where: {
+        id: id,
       },
-    },
-  })
-  if (pokeById.length) {
-    return pokeById
+      include: {
+        model: Type,
+        attributes: ['name'],
+        through: {
+          attributes: [],
+        },
+      },
+    })
+  }
+  if (pokeById) {
+    const p = pokeById.pop()
+    const buildPokemon = {
+      id: p.id,
+      name: p.name,
+      hp: p.hp,
+      attack: p.attack,
+      defense: p.defense,
+      speed: p.speed,
+      height: p.height,
+      weight: p.weight,
+      types: p.types.map((t) => t.name),
+      image: p.image,
+    }
+    return buildPokemon
   } else {
     try {
       const results = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -115,37 +109,41 @@ const findPokemon = async (id) => {
 }
 
 const findPokemonByNameDb = async (name) => {
-  let pokeByNameDB = await Pokemon.findAll({
-    where: {
-      name: name.toLowerCase(),
-    },
-    include: {
-      model: Type,
-      attributes: ['name'],
-      through: {
-        attributes: [],
+  try {
+    let pokeByNameDB = await Pokemon.findAll({
+      where: {
+        name: name.toLowerCase(),
       },
-    },
-  })
-  if (!pokeByNameDB.length) {
-    return pokemonByNameAPI(name.toLowerCase())
-  }
-
-  pokeByNameDB = pokeByNameDB.map((p) => {
-    return {
-      id: p.id,
-      name: p.name,
-      hp: p.hp,
-      attack: p.attack,
-      defense: p.defense,
-      speed: p.speed,
-      height: p.height,
-      weight: p.weight,
-      types: p.types.map((t) => t.name),
-      image: p.image,
+      include: {
+        model: Type,
+        attributes: ['name'],
+        through: {
+          attributes: [],
+        },
+      },
+    })
+    if (!pokeByNameDB.length) {
+      return pokemonByNameAPI(name.toLowerCase())
     }
-  })
-  return pokeByNameDB
+
+    pokeByNameDB = pokeByNameDB.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        hp: p.hp,
+        attack: p.attack,
+        defense: p.defense,
+        speed: p.speed,
+        height: p.height,
+        weight: p.weight,
+        types: p.types.map((t) => t.name),
+        image: p.image,
+      }
+    })
+    return pokeByNameDB
+  } catch (error) {
+    return 'That pokemon does not exist'
+  }
 }
 async function pokemonByNameAPI(name) {
   try {

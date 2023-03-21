@@ -1,0 +1,39 @@
+.navBody {
+  background-image: url(https://images2.alphacoders.com/967/thumb-1920-967747.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.navBody button {
+  margin-left: 10px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: 19px;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  border-radius: 10%;
+}
+
+.navBody button:hover {
+  text-decoration: underline;
+}
+
+.navBody input[type='text'] {
+  border: none;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 20px;
+  width: 300px;
+}
+
+.navBody input[type='text']:focus {
+  outline: none;
+}

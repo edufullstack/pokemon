@@ -1,0 +1,64 @@
+.detailBody {
+  background-image: url(https://images.wikidexcdn.net/mwuploads/esssbwiki/thumb/2/2c/latest/20180819065319/Estadio_Pok%C3%A9mon_2_SSBU.jpg/1200px-Estadio_Pok%C3%A9mon_2_SSBU.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+
+.detailBody h2,
+.detailBody h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.detailBody h2,
+p {
+  color: #ffa500;
+  background-color: #ffffff;
+  padding: 8px 16px;
+  border: 2px solid #ffa500;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.detailBody h1,
+p {
+  color: #ffffff;
+  background-color: #ffa500;
+  padding: 8px 16px;
+  border: 2px solid #ffa500;
+  border-radius: 20px;
+}
+
+.detailBody img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5%;
+  margin: 20px 0;
+}
+
+.detailBody p {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.detailBody p:first-of-type {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

@@ -9,6 +9,7 @@ const {
   postPokemon,
   findPokemonByNameDb,
   getAllPokemonsDb,
+  deletePokemon,
 } = require('../controllers/index')
 
 router.get('/', async (req, res) => {
@@ -54,4 +55,15 @@ router.post('/', async (req, res) => {
     return { error: error.message }
   }
 })
+
+router.delete('/:idPokemon', async (req, res) => {
+  const { idPokemon } = req.params
+  try {
+    await deletePokemon(idPokemon)
+    res.status(200).json('Pokemon Deleted')
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+})
+
 module.exports = router

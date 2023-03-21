@@ -9,6 +9,7 @@ import {
   GET_TYPES,
   POST_POKEMON,
   CLEAN_DETAIL,
+  DELETE_POKEMON,
 } from './action-types'
 
 const initialState = {
@@ -124,6 +125,17 @@ const reducer = (state = initialState, action) => {
 
     case CLEAN_DETAIL:
       return { ...state, details: [] }
+
+    case DELETE_POKEMON:
+      return {
+        ...state,
+        pokemons: state.pokemons.filter(
+          (pokemon) => pokemon.id !== action.payload
+        ),
+        allPokemons: state.allPokemons.filter(
+          (pokemon) => pokemon.id !== action.payload
+        ),
+      }
 
     default:
       return { ...state }

@@ -27,3 +27,19 @@
 h2 {
   color: #ffffff; /* esto establece el color de las letras del h4 */
 }
+
+.deleteButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.deleteButton:hover {
+  transform: scale(1.1);
+}

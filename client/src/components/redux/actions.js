@@ -8,6 +8,7 @@ import {
   RESET_POKEMONS,
   GET_TYPES,
   CLEAN_DETAIL,
+  DELETE_POKEMON,
 } from './action-types'
 import axios from 'axios'
 
@@ -71,4 +72,11 @@ export const postPokemon = (payload) => {
 
 export const cleanDetail = () => {
   return { type: CLEAN_DETAIL }
+}
+
+export const deletePokemon = (idPokemon) => {
+  return async function (dispatch) {
+    await axios.delete(`http://localhost:3001/pokemons/${idPokemon}`)
+    dispatch({ type: DELETE_POKEMON, payload: idPokemon })
+  }
 }

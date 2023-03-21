@@ -224,6 +224,12 @@ const getTypes = async () => {
   return types
 }
 
+const deletePokemon = async (id) => {
+  await Pokemon.destroy({
+    where: { id: id },
+  })
+}
+
 module.exports = {
   getTypes,
   getAllPokemons,
@@ -231,4 +237,5 @@ module.exports = {
   getAllPokemonsDb,
   findPokemonByNameDb,
   postPokemon,
+  deletePokemon,
 }

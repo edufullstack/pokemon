@@ -9,14 +9,25 @@ const About = () => {
         <div className={styles.cardBody}>
           <p>Hello, my name is Jose Eduardo Ramirez Hernandez </p>
           <p>
-            This Single Page Application was created with Lorem ipsum dolor sit,
-            amet consectetur adipisicing elit. Alias delectus tempora sint illo
-            enim! Quae suscipit vitae cumque optio facere, consectetur
-            doloremque autem! Ex doloremque magnam vitae, ad ducimus quidem!
+            This Single Page Application was created with HTML, CSS, JavaScript,
+            React and Redux for the front-end and with SQL, PostgreSQL and
+            NODEJS for the back-end. you can find my linkedin and my
+            repositories clicking the buttons below.
           </p>
-          <button className={styles.cardButton}>Linkedin</button>
-
-          <button className={styles.cardButton}>Github</button>
+          <a
+            href='https://www.linkedin.com/in/joseeduardoramirezhernandez/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <button className={styles.cardButton}>Linkedin</button>
+          </a>
+          <a
+            href='https://github.com/edufullstack'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <button className={styles.cardButton}>Github</button>
+          </a>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import styles from './formPage.module.css'
 const Form = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const [disabled, setDisabled] = useState(true)
   const [errors, setErrors] = useState({})
   const name = useRef(null)
   const types = useSelector((state) => state.types)
@@ -30,9 +31,17 @@ const Form = () => {
   const handleChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value })
     setErrors(Validate({ ...input, [event.target.name]: event.target.value }))
+
+    const newErrors = Validate({
+      ...input,
+      [event.target.name]: event.target.value,
+    })
+    const hasErrors = Object.keys(newErrors).length > 0
+    setDisabled(hasErrors)
   }
 
   const handleSelect = (event) => {
+    setDisabled(true)
     setInput({
       ...input,
       types: [
@@ -43,6 +52,12 @@ const Form = () => {
     setErrors(
       Validate({ ...input, types: [...input.types, event.target.value] })
     )
+    const newErrors = Validate({
+      ...input,
+      types: [...input.types, event.target.value],
+    })
+    const hasErrors = Object.keys(newErrors).length > 0
+    setDisabled(hasErrors)
   }
 
   const handleSubmit = (event) => {
@@ -73,11 +88,17 @@ const Form = () => {
         types: input.types.filter((type) => item !== type),
       })
     )
+    const newErrors = Validate({
+      ...input,
+      types: input.types.filter((type) => item !== type),
+    })
+    const hasErrors = Object.keys(newErrors).length > 0
+    setDisabled(hasErrors)
   }
 
   return (
     <div className={styles.formBody}>
-      <h1>Crea tu personaje</h1>
+      <h1>Create your Pokemon</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
@@ -165,7 +186,7 @@ const Form = () => {
           </select>
           {errors.types && <p>{errors.types}</p>}
         </div>
-        <button type='submit' disabled={Object.keys(errors).length > 0}>
+        <button type='submit' disabled={disabled}>
           Create Pokemon
         </button>
       </form>

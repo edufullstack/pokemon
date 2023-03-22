@@ -22,9 +22,10 @@
 .card:hover {
   transform: scale(1.05);
   box-shadow: 0px 0px 10px 2px rgb(248, 47, 47);
+  background-color: black;
 }
-.card h4,
-h2 {
+
+.card h2 {
   color: #ffffff; /* esto establece el color de las letras del h4 */
 }
 
@@ -42,4 +43,81 @@ h2 {
 
 .deleteButton:hover {
   transform: scale(1.1);
+}
+
+.bug {
+  background-color: #92bc2c;
+}
+
+.dark {
+  background-color: #595761;
+}
+
+.dragon {
+  background-color: #0c69c8;
+}
+
+.electric {
+  background-color: #f2d94e;
+}
+
+.fairy {
+  background-color: #ee90e6;
+}
+
+.fighting {
+  background-color: #d3425f;
+}
+
+.fire {
+  background-color: #fb4c4c;
+}
+
+.flying {
+  background-color: #bed5ff;
+  color: black;
+}
+
+.ghost {
+  background-color: #5f6dbc;
+}
+
+.grass {
+  background-color: #5fbd58;
+}
+
+.ground {
+  background-color: #da7c4d;
+}
+
+.ice {
+  background-color: #75d0c1;
+}
+
+.normal {
+  background-color: #a0a29f;
+}
+
+.poison {
+  background-color: #b763cf;
+}
+
+.psychic {
+  background-color: #fa8581;
+}
+
+.rock {
+  background-color: #c9bb8a;
+}
+
+.steel {
+  background-color: #5695a3;
+}
+
+.water {
+  background-color: #539ddf;
+}
+
+.decoration {
+  text-decoration: none;
 }

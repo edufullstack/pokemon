@@ -17,16 +17,20 @@ const Card = ({ name, image, types, id }) => {
           x
         </button>
       )}
-      <Link to={`/detail/${id}`}>
+      <Link className={styles.decoration} to={`/detail/${id}`}>
         <img src={image} alt={name} />
         <h2>{name}</h2>
-        <h4>
-          {types.length === 1 ? types[0] : ''}
-          {types.length === 2 ? types[0] + ' ' + types[1] : null}
-          {types.length === 3
-            ? types[0] + ' ' + types[1] + ' ' + types[2]
-            : null}
-        </h4>
+        <div className={styles.horizontal}>
+          {types &&
+            types.map((el) => {
+              const typeClass = styles[`${el}`]
+              return (
+                <p className={typeClass} key={el}>
+                  {el}
+                </p>
+              )
+            })}
+        </div>
       </Link>
     </div>
   )

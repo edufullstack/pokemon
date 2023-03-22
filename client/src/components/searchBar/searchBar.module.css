@@ -12,6 +12,7 @@
   outline: none;
   width: 200px;
   margin-right: 10px;
+  border-radius: 5px;
 }
 
 .searchButton {
@@ -22,6 +23,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  border-radius: 5px;
 }
 
 .searchButton:hover {

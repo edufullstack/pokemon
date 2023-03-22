@@ -20,32 +20,29 @@ const DetailPage = () => {
 
   return (
     <div className={styles.detailBody}>
-      <h2>ID: {details?.id}</h2>
-      <h1>Name: {details.name}</h1>
-      <img src={details.image} alt='' />
-      <p>Health Points: {details.hp}</p>
-      <p>Attack: {details.attack}</p>
-      <p>Defense: {details.defense}</p>
-      <p>Speed: {details.speed && details.speed}</p>
-      <p>Height: {details.height && details.height}</p>
-      <p>Weight: {details.weight && details.weight}</p>
-      <p>
-        Types:
-        {details.types && details.types.length === 1
-          ? ' ' + details.types[0]
-          : ''}
-        {details.types && details.types.length === 2
-          ? ' ' + details.types[0] + ' ' + details.types[1]
-          : null}
-        {details.types && details.types.length === 3
-          ? ' ' +
-            details.types[0] +
-            ' ' +
-            details.types[1] +
-            ' ' +
-            details.types[2]
-          : null}
-      </p>
+      <div className={styles.left}>
+        <h2>ID: {details?.id}</h2>
+        <h1>Name: {details.name}</h1>
+        <img src={details.image} alt='' />
+      </div>
+      <div className={styles.right}>
+        <p>Health Points: {details.hp}</p>
+        <p>Attack: {details.attack}</p>
+        <p>Defense: {details.defense}</p>
+        <p>Speed: {details.speed && details.speed}</p>
+        <p>Height: {details.height && details.height}</p>
+        <p>Weight: {details.weight && details.weight}</p>
+        <p>Types:</p>
+        {details.types &&
+          details.types.map((el) => {
+            const typeClass = styles[`${el}`]
+            return (
+              <p className={typeClass} key={el}>
+                {el}
+              </p>
+            )
+          })}
+      </div>
     </div>
   )
 }

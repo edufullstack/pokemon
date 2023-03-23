@@ -17,9 +17,9 @@ const Form = () => {
     hp: '',
     attack: '',
     defense: '',
-    speed: '',
-    height: '',
-    weight: '',
+    speed: '1',
+    height: '1',
+    weight: '1',
     types: [],
   })
 
@@ -69,9 +69,9 @@ const Form = () => {
       hp: '',
       attack: '',
       defense: '',
-      speed: '',
-      height: '',
-      weight: '',
+      speed: '1',
+      height: '1',
+      weight: '1',
       types: [],
     })
     history.push('/home')
@@ -114,65 +114,85 @@ const Form = () => {
         <div>
           <label>HP (Health Points)</label>
           <input
-            type='number'
-            min='0'
+            type='range'
+            min='1'
+            max='99'
             value={input.hp}
             name='hp'
             onChange={handleChange}
           />
-          {errors.hp && <p>{errors.hp}</p>}
+          {errors.hp && errors.hp ? (
+            <p>{errors.hp}</p>
+          ) : (
+            <p> {input.hp} Healt Points </p>
+          )}
         </div>
         <div>
           <label>Attack</label>
           <input
-            type='number'
-            min='0'
+            type='range'
+            min='1'
+            max='99'
             value={input.attack}
             name='attack'
             onChange={handleChange}
           />
-          {errors.attack && <p>{errors.attack}</p>}
+          {errors.attack && errors.attack ? (
+            <p>{errors.attack}</p>
+          ) : (
+            <p> {input.attack} Points </p>
+          )}
         </div>
         <div>
           <label>Defense</label>
           <input
-            type='number'
-            min='0'
+            type='range'
+            min='1'
+            max='99'
             value={input.defense}
             name='defense'
             onChange={handleChange}
           />
-          {errors.defense && <p>{errors.defense}</p>}
+
+          {errors.defense && errors.defense ? (
+            <p>{errors.defense}</p>
+          ) : (
+            <p> {input.defense} Points </p>
+          )}
         </div>
         <div>
           <label>Speed</label>
           <input
-            type='number'
-            min='0'
+            type='range'
+            min='1'
             value={input.speed}
             name='speed'
             onChange={handleChange}
           />
+          <p> {input.speed} km/h</p>
         </div>
         <div>
           <label>Height</label>
           <input
-            type='number'
-            min='0'
+            type='range'
+            min='1'
+            max='99'
             value={input.height}
             name='height'
             onChange={handleChange}
           />
+          <p> {input.height} cm.</p>
         </div>
         <div>
           <label>Weight</label>
           <input
-            type='number'
-            min='0'
+            type='range'
+            min='1'
             value={input.weight}
             name='weight'
             onChange={handleChange}
           />
+          <p> {input.weight} kg.</p>
         </div>
         <div>
           <select onChange={handleSelect}>

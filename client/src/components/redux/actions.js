@@ -9,6 +9,7 @@ import {
   GET_TYPES,
   CLEAN_DETAIL,
   DELETE_POKEMON,
+  POST_POKEMON,
 } from './action-types'
 import axios from 'axios'
 
@@ -66,7 +67,7 @@ export const getTypes = () => {
 export const postPokemon = (payload) => {
   return async (dispatch) => {
     let post = await axios.post('http://localhost:3001/pokemons/', payload)
-    return post
+    return { type: POST_POKEMON, payload: post }
   }
 }
 

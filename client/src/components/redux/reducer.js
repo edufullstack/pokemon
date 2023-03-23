@@ -115,7 +115,7 @@ const reducer = (state = initialState, action) => {
       }
 
     case RESET_POKEMONS:
-      return { ...state, pokemons: state.allPokemons, error: false }
+      return { ...state, pokemons: state.allPokemons }
 
     case GET_TYPES:
       return { ...state, types: action.payload }

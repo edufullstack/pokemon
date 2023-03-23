@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { searchPokemon } from '../redux/actions'
 
-const SearchBar = () => {
+const SearchBar = ({ setCurrentPage }) => {
   const dispatch = useDispatch()
   const [name, setName] = useState('')
 
@@ -15,6 +15,7 @@ const SearchBar = () => {
     event.preventDefault()
     dispatch(searchPokemon(name))
     setName('')
+    setCurrentPage(1)
   }
 
   function handleKeyDown(event) {

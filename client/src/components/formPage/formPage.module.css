@@ -32,7 +32,6 @@
 }
 
 .formBody input[type='text'],
-.formBody input[type='number'],
 .formBody select {
   width: 10rem;
   margin-bottom: 10px;
@@ -77,13 +76,44 @@ button[type='submit']:disabled {
 }
 
 .types button {
-  margin-right: 10px;
+  margin-right: 1px;
+  margin: -80px;
 }
 
 .types p {
-  margin: 0;
+  margin: 80px;
   color: rgb(26, 157, 238);
   font-weight: bold;
   background-color: rgb(255, 234, 196);
   border: 6px solid #000351;
+}
+
+.formBody input[type='range'] {
+  width: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.formBody input[type='range']:focus {
+  outline: none;
+}
+
+.formBody input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.formBody input[type='range']::-webkit-slider-thumb {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: #f5ba00;
+  -webkit-appearance: none;
+  margin-top: -8px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
 }

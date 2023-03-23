@@ -32,9 +32,8 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    if (pokemons.length < 1) {
-      dispatch(getPokemons())
-    }
+    dispatch(getPokemons())
+
     dispatch(getTypes())
   }, [])
 
@@ -54,7 +53,7 @@ const HomePage = () => {
   return (
     <div className={styles.homeBody}>
       <div>
-        <SearchBar />
+        <SearchBar setCurrentPage={setCurrentPage} />
       </div>
       <div>
         <select className={styles.filter} onChange={handleOrder}>

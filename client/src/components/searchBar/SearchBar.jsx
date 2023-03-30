@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { searchPokemon } from '../redux/actions'
 
-const SearchBar = ({ setCurrentPage }) => {
+const SearchBar = ({ setCurrentPage, handleBarra }) => {
   const dispatch = useDispatch()
   const [name, setName] = useState('')
 
@@ -16,12 +16,18 @@ const SearchBar = ({ setCurrentPage }) => {
     dispatch(searchPokemon(name))
     setName('')
     setCurrentPage(1)
+    if (event.target.value) {
+      handleBarra()
+    }
   }
 
   function handleKeyDown(event) {
     if (event.keyCode === 13) {
       // 13 es el código para la tecla "Enter"
       handleSubmit(event)
+      if (event.target.value) {
+        handleBarra()
+      }
     }
   }
 

@@ -10,6 +10,7 @@ import {
   POST_POKEMON,
   CLEAN_DETAIL,
   DELETE_POKEMON,
+  SET_BAR,
 } from './action-types'
 
 const initialState = {
@@ -17,6 +18,8 @@ const initialState = {
   allPokemons: [],
   details: [],
   types: [],
+  filteredOrigin: [],
+  bar: true,
 }
 
 const reducer = (state = initialState, action) => {
@@ -25,10 +28,25 @@ const reducer = (state = initialState, action) => {
       return { ...state, pokemons: action.payload }
 
     case GET_POKEMONS:
-      return { ...state, pokemons: action.payload, allPokemons: action.payload }
+      if (
+        action.payload.length === state.allPokemons.length &&
+        state.allPokemons.length > 0
+      ) {
+        return {
+          ...state,
+          allPokemons: action.payload,
+          filteredOrigin: action.payload,
+        }
+      }
+      return {
+        ...state,
+        pokemons: action.payload,
+        allPokemons: action.payload,
+        filteredOrigin: action.payload,
+      }
 
     case FILTER_POKEMONS_TYPE:
-      const allPokemons = [...state.allPokemons]
+      const allPokemons = [...state.filteredOrigin]
       let filteredPokemons =
         action.payload === 'all'
           ? allPokemons
@@ -47,7 +65,10 @@ const reducer = (state = initialState, action) => {
       const originFilter =
         action.payload === 'database'
           ? allPokemon.filter((item) => typeof item.id !== 'number')
+          : action.payload === 'all'
+          ? [...state.allPokemons]
           : allPokemon.filter((item) => typeof item.id === 'number')
+      state.filteredOrigin = originFilter
       return {
         ...state,
         pokemons: action.payload === 'all' ? allPokemon : originFilter,
@@ -89,7 +110,7 @@ const reducer = (state = initialState, action) => {
       }
 
     case RESET_POKEMONS:
-      return { ...state, pokemons: state.allPokemons }
+      return { ...state, pokemons: state.allPokemons, bar: true }
 
     case GET_TYPES:
       return { ...state, types: action.payload }
@@ -99,6 +120,8 @@ const reducer = (state = initialState, action) => {
 
     case CLEAN_DETAIL:
       return { ...state, details: [] }
+    case SET_BAR:
+      return { ...state, bar: false }
 
     case DELETE_POKEMON:
       return {

@@ -10,6 +10,7 @@ import {
   CLEAN_DETAIL,
   DELETE_POKEMON,
   POST_POKEMON,
+  SET_BAR,
 } from './action-types'
 import axios from 'axios'
 
@@ -80,4 +81,8 @@ export const deletePokemon = (idPokemon) => {
     await axios.delete(`http://localhost:3001/pokemons/${idPokemon}`)
     dispatch({ type: DELETE_POKEMON, payload: idPokemon })
   }
+}
+
+export const setBar = () => {
+  return { type: SET_BAR }
 }

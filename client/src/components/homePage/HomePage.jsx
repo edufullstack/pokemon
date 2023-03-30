@@ -7,6 +7,7 @@ import {
   filterPokemonsOrigin,
   orderPokemons,
   getTypes,
+  setBar,
 } from '../redux/actions'
 import Card from '../card/Card'
 import Paginado from '../paginado/Paginado'
@@ -17,6 +18,10 @@ const HomePage = () => {
   const dispatch = useDispatch()
   const pokemons = useSelector((state) => state.pokemons)
   const types = useSelector((state) => state.types)
+  const [restoredValue, setRestoredValue] = useState(
+    window.localStorage.getItem('restoredValue')
+  )
+  const bar = useSelector((state) => state.bar)
   const [orden, setOrden] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
@@ -33,14 +38,19 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(getPokemons())
-
     dispatch(getTypes())
   }, [])
 
   const handleFilterType = (event) => {
+    setCurrentPage(1)
+    window.localStorage.setItem('restoredValue', event.target.value)
+    setRestoredValue(event.target.value)
     dispatch(filterPokemonsType(event.target.value))
   }
   const handleOriginFilter = (event) => {
+    setCurrentPage(1)
+    window.localStorage.setItem('restoredValue', event.target.value)
+    setRestoredValue('all')
     dispatch(filterPokemonsOrigin(event.target.value))
   }
   const handleOrder = (event) => {
@@ -49,36 +59,44 @@ const HomePage = () => {
     setCurrentPage(1)
     setOrden(`Ordenado ${event.target.value} `)
   }
-
+  const handleBarra = () => {
+    dispatch(setBar(false))
+  }
   return (
     <div className={styles.homeBody}>
       <div>
-        <SearchBar setCurrentPage={setCurrentPage} />
+        <SearchBar handleBarra={handleBarra} setCurrentPage={setCurrentPage} />
       </div>
-      <div>
-        <select className={styles.filter} onChange={handleOrder}>
-          <option value='id'>By id</option>
-          <option value='ascendingName'>A-Z</option>
-          <option value='descendingName'>Z-A</option>
-          <option value='ascendingAttack'>Ascending By Attack</option>
-          <option value='descendingAttack'>Descending By Attack</option>
-        </select>
-        <select className={styles.filter} onChange={handleFilterType}>
-          <option value='all'>All</option>
-          {types.map((item, index) => {
-            return (
-              <option key={index} value={item.name}>
-                {item.name}
-              </option>
-            )
-          })}
-        </select>
-        <select className={styles.filter} onChange={handleOriginFilter}>
-          <option value='all'>All</option>
-          <option value='database'>Database</option>
-          <option value='api'>API</option>
-        </select>
-      </div>
+      {bar ? (
+        <div>
+          <select className={styles.filter} onChange={handleOriginFilter}>
+            <option value='all'>All</option>
+            <option value='database'>Database</option>
+            <option value='api'>API</option>
+          </select>
+          <select className={styles.filter} onChange={handleOrder}>
+            <option value='id'>By id</option>
+            <option value='ascendingName'>A-Z</option>
+            <option value='descendingName'>Z-A</option>
+            <option value='ascendingAttack'>Ascending By Attack</option>
+            <option value='descendingAttack'>Descending By Attack</option>
+          </select>
+          <select
+            value={restoredValue}
+            className={styles.filter}
+            onChange={handleFilterType}
+          >
+            <option value='all'>All</option>
+            {types.map((item, index) => {
+              return (
+                <option key={index} value={item.name}>
+                  {item.name}
+                </option>
+              )
+            })}
+          </select>
+        </div>
+      ) : null}
       <div className={styles.paginado}></div>
       <div className={styles.paginado}>
         <button

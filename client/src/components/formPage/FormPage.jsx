@@ -41,23 +41,24 @@ const Form = () => {
   }
 
   const handleSelect = (event) => {
-    setDisabled(true)
-    setInput({
-      ...input,
-      types: [
-        ...input.types,
-        input.types.includes(event.target.value) ? null : event.target.value,
-      ],
-    })
-    setErrors(
-      Validate({ ...input, types: [...input.types, event.target.value] })
-    )
-    const newErrors = Validate({
-      ...input,
-      types: [...input.types, event.target.value],
-    })
-    const hasErrors = Object.keys(newErrors).length > 0
-    setDisabled(hasErrors)
+    if (input.types.includes(event.target.value)) return
+    else {
+      setDisabled(true)
+      setInput({
+        ...input,
+        types: [...input.types, event.target.value],
+      })
+      setErrors(
+        Validate({ ...input, types: [...input.types, event.target.value] })
+      )
+
+      const newErrors = Validate({
+        ...input,
+        types: [...input.types, event.target.value],
+      })
+      const hasErrors = Object.keys(newErrors).length > 0
+      setDisabled(hasErrors)
+    }
   }
 
   const handleSubmit = (event) => {

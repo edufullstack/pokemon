@@ -182,7 +182,7 @@ const postPokemon = async (
   types
 ) => {
   try {
-    const random = Math.floor(Math.random() * 900 + 1)
+    const random = Math.floor(Math.random() * 151 + 1)
     let image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${random}.png`
 
     let newPokemon = await Pokemon.create({

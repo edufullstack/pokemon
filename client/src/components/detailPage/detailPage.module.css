@@ -12,7 +12,7 @@
   height: auto;
   border: 1px solid #dddddd;
   border-radius: 10px;
-  padding-bottom: 12rem;
+  padding-bottom: 2rem;
 }
 
 .detailBody h2,
@@ -46,7 +46,7 @@ p {
   height: 300px;
   object-fit: cover;
   border-radius: 5%;
-  margin: 20px 0;
+  margin: 80px 0;
 }
 
 .detailBody p {

@@ -1,5 +1,10 @@
 .paginado {
   display: flex;
   list-style: none;
-  justify-content: center; /* esto es opcional y centrará los elementos horizontalmente */
+  justify-content: center;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
 }

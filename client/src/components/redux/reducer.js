@@ -28,20 +28,22 @@ const reducer = (state = initialState, action) => {
       return { ...state, pokemons: action.payload, allPokemons: action.payload }
 
     case FILTER_POKEMONS_TYPE:
-      const allPokemons = state.allPokemons
-      const filteredPokemons =
+      const allPokemons = [...state.allPokemons]
+      let filteredPokemons =
         action.payload === 'all'
           ? allPokemons
           : allPokemons.filter(
               (item) => item.types && item.types.includes(action.payload)
             )
+      !filteredPokemons.length &&
+        (filteredPokemons = ['no hay pokemones de ese tipo'])
       return {
         ...state,
         pokemons: filteredPokemons,
       }
 
     case FILTER_POKEMONS_ORIGIN:
-      const allPokemon = state.allPokemons
+      const allPokemon = [...state.allPokemons]
       const originFilter =
         action.payload === 'database'
           ? allPokemon.filter((item) => typeof item.id !== 'number')
@@ -52,59 +54,31 @@ const reducer = (state = initialState, action) => {
       }
 
     case ORDER_POKEMONS:
-      let allPoke = state.allPokemons
+      let allPoke = [...state.pokemons]
       let sortedPokemons
-      if (action.payload === 'id') {
-        sortedPokemons = allPoke.sort((a, b) => {
-          if (a.id > b.id) {
-            return 1
-          }
-          if (b.id > a.id) {
-            return -1
-          }
-          return 0
-        })
-      }
-      if (action.payload === 'ascendingName') {
-        sortedPokemons = allPoke.sort((a, b) => {
-          if (a.name > b.name) {
-            return 1
-          }
-          if (b.name > a.name) {
-            return -1
-          }
-          return 0
-        })
-      } else if (action.payload === 'descendingName') {
-        sortedPokemons = allPoke.sort((a, b) => {
-          if (a.name > b.name) {
-            return -1
-          }
-          if (b.name > a.name) {
-            return 1
-          }
-          return 0
-        })
-      } else if (action.payload === 'ascendingAttack') {
-        sortedPokemons = allPoke.sort((a, b) => {
-          if (a.attack > b.attack) {
-            return 1
-          }
-          if (b.attack > a.attack) {
-            return -1
-          }
-          return 0
-        })
-      } else if (action.payload === 'descendingAttack') {
-        sortedPokemons = allPoke.sort((a, b) => {
-          if (a.attack > b.attack) {
-            return -1
-          }
-          if (b.attack > a.attack) {
-            return 1
-          }
-          return 0
-        })
+      switch (action.payload) {
+        case 'id':
+          sortedPokemons = [
+            ...allPoke
+              .filter((item) => typeof item.id === 'number')
+              .sort((a, b) => a.id - b.id),
+            ...allPoke.filter((item) => typeof item.id !== 'number'),
+          ]
+          break
+        case 'ascendingName':
+          sortedPokemons = allPoke.sort((a, b) => a.name.localeCompare(b.name))
+          break
+        case 'descendingName':
+          sortedPokemons = allPoke.sort((a, b) => b.name.localeCompare(a.name))
+          break
+        case 'ascendingAttack':
+          sortedPokemons = allPoke.sort((a, b) => a.attack - b.attack)
+          break
+        case 'descendingAttack':
+          sortedPokemons = allPoke.sort((a, b) => b.attack - a.attack)
+          break
+        default:
+          sortedPokemons = allPoke
       }
       return { ...state, pokemons: sortedPokemons }
 

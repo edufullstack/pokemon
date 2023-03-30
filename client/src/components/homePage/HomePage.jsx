@@ -79,17 +79,45 @@ const HomePage = () => {
           <option value='api'>API</option>
         </select>
       </div>
+      <div className={styles.paginado}></div>
       <div className={styles.paginado}>
+        <button
+          onClick={() =>
+            currentPage === 1 ? null : setCurrentPage(currentPage - 1)
+          }
+        >
+          Previus
+        </button>
         <Paginado
           pokemonsPerPage={pokemonsPerPage}
           pokemons={pokemons.length}
           paginado={paginado}
         />
+        <button
+          onClick={() =>
+            currentPage === Math.ceil(pokemons.length / pokemonsPerPage)
+              ? null
+              : setCurrentPage(currentPage + 1)
+          }
+        >
+          Next
+        </button>
       </div>
       {!currentPokemons.length && <Loader />}
+
       <div className={styles.cardContainer}>
         {Array.isArray(currentPokemons) && currentPokemons ? (
-          currentPokemons?.map((item) => {
+          currentPokemons.map((item) => {
+            if (typeof item === 'string') {
+              return (
+                <div className={styles.errorContainer}>
+                  <h3 className={styles.errorTitle}>
+                    Error 404: Pokemon not found with that type, please try with
+                    another
+                  </h3>
+                </div>
+              )
+            }
             return (
               <Card
                 key={item.id}

@@ -41,7 +41,12 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(getPokemons())
     dispatch(getTypes())
-  }, [])
+    if (buttons[2]) {
+      setOrder(buttons[2])
+      setOrigin(buttons[0])
+      setTypeFilter(buttons[1])
+    }
+  }, [buttons])
 
   const handleFilterType = (event) => {
     setCurrentPage(1)
@@ -75,9 +80,7 @@ const HomePage = () => {
       {bar ? (
         <div>
           <select
-            value={
-              buttons.length > 0 ? buttons[0] : origin && setOrigin(buttons[0])
-            }
+            value={buttons[0] && buttons[0] ? buttons[0] : origin}
             className={styles.filter}
             onChange={handleOriginFilter}
           >
@@ -86,9 +89,7 @@ const HomePage = () => {
             <option value='api'>API</option>
           </select>
           <select
-            value={
-              buttons.length > 0 ? buttons[2] : order && setOrder(buttons[2])
-            }
+            value={buttons[2] && buttons[2] ? buttons[2] : order}
             className={styles.filter}
             onChange={handleOrder}
           >
@@ -109,11 +110,7 @@ const HomePage = () => {
             </option>
           </select>
           <select
-            value={
-              buttons.length > 0
-                ? buttons[1]
-                : typeFilter && setTypeFilter(buttons[1])
-            }
+            value={buttons[1] && buttons[1] ? buttons[1] : typeFilter}
             className={styles.filter}
             onChange={handleFilterType}
           >

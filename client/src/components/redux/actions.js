@@ -11,6 +11,7 @@ import {
   DELETE_POKEMON,
   POST_POKEMON,
   SET_BAR,
+  SET_BUTTONS,
 } from './action-types'
 import axios from 'axios'
 
@@ -85,4 +86,7 @@ export const deletePokemon = (idPokemon) => {
 
 export const setBar = () => {
   return { type: SET_BAR }
+}
+export const setButtons = (payload) => {
+  return { type: SET_BUTTONS, payload }
 }

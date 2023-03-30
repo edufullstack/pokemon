@@ -2,12 +2,14 @@ import styles from './navBar.module.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { resetPokemonsHome } from '../redux/actions'
+import { setButtons } from '../redux/actions'
 
 const NavBar = () => {
   const dispatch = useDispatch()
 
   const handleClick = () => {
     dispatch(resetPokemonsHome())
+    dispatch(setButtons(['all', 'all', 'id']))
   }
 
   return (

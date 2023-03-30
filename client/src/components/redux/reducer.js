@@ -11,6 +11,7 @@ import {
   CLEAN_DETAIL,
   DELETE_POKEMON,
   SET_BAR,
+  SET_BUTTONS,
 } from './action-types'
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   types: [],
   filteredOrigin: [],
   bar: true,
+  buttons: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -122,6 +124,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, details: [] }
     case SET_BAR:
       return { ...state, bar: false }
+    case SET_BUTTONS:
+      return { ...state, buttons: action.payload }
 
     case DELETE_POKEMON:
       return {

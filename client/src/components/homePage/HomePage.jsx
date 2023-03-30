@@ -8,21 +8,24 @@ import {
   orderPokemons,
   getTypes,
   setBar,
+  setButtons,
 } from '../redux/actions'
 import Card from '../card/Card'
 import Paginado from '../paginado/Paginado'
 import SearchBar from '../searchBar/SearchBar'
 import Loader from '../loader/Loader'
+import useLocalStorage from '../customHook/useLocalStorage'
 
 const HomePage = () => {
   const dispatch = useDispatch()
   const pokemons = useSelector((state) => state.pokemons)
   const types = useSelector((state) => state.types)
-  const [restoredValue, setRestoredValue] = useState(
-    window.localStorage.getItem('restoredValue')
-  )
+  const [typeFilter, setTypeFilter] = useLocalStorage('textFilter', '')
+  const [origin, setOrigin] = useLocalStorage('origin', '')
+  const [order, setOrder] = useLocalStorage('order', '')
   const bar = useSelector((state) => state.bar)
   const [orden, setOrden] = useState('')
+  const buttons = useSelector((state) => state.buttons)
   const [currentPage, setCurrentPage] = useState(1)
   const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
   const indexOfLastPokemon = currentPage * pokemonsPerPage
@@ -35,7 +38,6 @@ const HomePage = () => {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
-
   useEffect(() => {
     dispatch(getPokemons())
     dispatch(getTypes())
@@ -43,18 +45,21 @@ const HomePage = () => {
 
   const handleFilterType = (event) => {
     setCurrentPage(1)
-    window.localStorage.setItem('restoredValue', event.target.value)
-    setRestoredValue(event.target.value)
+    dispatch(setButtons([]))
+    setTypeFilter(event.target.value)
     dispatch(filterPokemonsType(event.target.value))
   }
   const handleOriginFilter = (event) => {
     setCurrentPage(1)
-    window.localStorage.setItem('restoredValue', event.target.value)
-    setRestoredValue('all')
+    dispatch(setButtons([]))
+    setTypeFilter('all')
+    setOrigin(event.target.value)
     dispatch(filterPokemonsOrigin(event.target.value))
   }
   const handleOrder = (event) => {
     event.preventDefault()
+    dispatch(setButtons([]))
+    setOrder(event.target.value)
     dispatch(orderPokemons(event.target.value))
     setCurrentPage(1)
     setOrden(`Ordenado ${event.target.value} `)
@@ -69,20 +74,46 @@ const HomePage = () => {
       </div>
       {bar ? (
         <div>
-          <select className={styles.filter} onChange={handleOriginFilter}>
+          <select
+            value={
+              buttons.length > 0 ? buttons[0] : origin && setOrigin(buttons[0])
+            }
+            className={styles.filter}
+            onChange={handleOriginFilter}
+          >
             <option value='all'>All</option>
             <option value='database'>Database</option>
             <option value='api'>API</option>
           </select>
-          <select className={styles.filter} onChange={handleOrder}>
-            <option value='id'>By id</option>
-            <option value='ascendingName'>A-Z</option>
-            <option value='descendingName'>Z-A</option>
-            <option value='ascendingAttack'>Ascending By Attack</option>
-            <option value='descendingAttack'>Descending By Attack</option>
+          <select
+            value={
+              buttons.length > 0 ? buttons[2] : order && setOrder(buttons[2])
+            }
+            className={styles.filter}
+            onChange={handleOrder}
+          >
+            <option key='id' value='id'>
+              By id
+            </option>
+            <option key='ascendingName' value='ascendingName'>
+              A-Z
+            </option>
+            <option key='descendingName' value='descendingName'>
+              Z-A
+            </option>
+            <option key='ascendingAttack' value='ascendingAttack'>
+              Ascending By Attack
+            </option>
+            <option key='descendingAttack' value='descendingAttack'>
+              Descending By Attack
+            </option>
           </select>
           <select
-            value={restoredValue}
+            value={
+              buttons.length > 0
+                ? buttons[1]
+                : typeFilter && setTypeFilter(buttons[1])
+            }
             className={styles.filter}
             onChange={handleFilterType}
           >

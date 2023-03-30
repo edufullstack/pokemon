@@ -58,8 +58,8 @@ const HomePage = () => {
       <div>
         <select className={styles.filter} onChange={handleOrder}>
           <option value='id'>By id</option>
-          <option value='ascendingName'>Ascending By Name</option>
-          <option value='descendingName'>Descending By Name</option>
+          <option value='ascendingName'>A-Z</option>
+          <option value='descendingName'>Z-A</option>
           <option value='ascendingAttack'>Ascending By Attack</option>
           <option value='descendingAttack'>Descending By Attack</option>
         </select>

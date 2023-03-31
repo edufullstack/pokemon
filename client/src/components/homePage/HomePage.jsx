@@ -46,7 +46,7 @@ const HomePage = () => {
       setOrigin(buttons[0])
       setTypeFilter(buttons[1])
     }
-  }, [buttons, dispatch])
+  }, [buttons, dispatch, getPokemons])
 
   const handleFilterType = (event) => {
     setCurrentPage(1)

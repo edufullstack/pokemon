@@ -63,19 +63,23 @@ const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(postPokemon(input))
-    alert('Pokemon created')
-    setInput({
-      name: '',
-      hp: '',
-      attack: '',
-      defense: '',
-      speed: '1',
-      height: '1',
-      weight: '1',
-      types: [],
-    })
-    history.push('/home')
+    if (Object.keys(errors).length === 0) {
+      dispatch(postPokemon(input))
+      alert('Pokemon created')
+      setInput({
+        name: '',
+        hp: '',
+        attack: '',
+        defense: '',
+        speed: '1',
+        height: '1',
+        weight: '1',
+        types: [],
+      })
+      history.push('/home')
+    } else {
+      alert('please fill all fields')
+    }
   }
 
   const handleDelete = (item) => {
@@ -207,9 +211,7 @@ const Form = () => {
           </select>
           {errors.types && <p>{errors.types}</p>}
         </div>
-        <button type='submit' disabled={disabled}>
-          Create Pokemon
-        </button>
+        <button type='submit'>Create Pokemon</button>
       </form>
       {input.types.map((type) => {
         if (type === null) return null

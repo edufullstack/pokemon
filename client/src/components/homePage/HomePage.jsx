@@ -46,7 +46,7 @@ const HomePage = () => {
       setOrigin(buttons[0])
       setTypeFilter(buttons[1])
     }
-  }, [buttons])
+  }, [buttons, dispatch])
 
   const handleFilterType = (event) => {
     setCurrentPage(1)

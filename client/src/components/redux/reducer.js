@@ -37,7 +37,6 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           allPokemons: action.payload,
-          filteredOrigin: action.payload,
         }
       }
       return {
@@ -67,9 +66,10 @@ const reducer = (state = initialState, action) => {
       const originFilter =
         action.payload === 'database'
           ? allPokemon.filter((item) => typeof item.id !== 'number')
-          : action.payload === 'all'
-          ? [...state.allPokemons]
-          : allPokemon.filter((item) => typeof item.id === 'number')
+          : action.payload === 'api'
+          ? allPokemon.filter((item) => typeof item.id === 'number')
+          : [...state.allPokemons]
+
       state.filteredOrigin = originFilter
       return {
         ...state,

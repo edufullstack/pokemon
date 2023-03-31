@@ -85,7 +85,9 @@ const reducer = (state = initialState, action) => {
             ...allPoke
               .filter((item) => typeof item.id === 'number')
               .sort((a, b) => a.id - b.id),
-            ...allPoke.filter((item) => typeof item.id !== 'number'),
+            ...allPoke
+              .filter((item) => typeof item.id !== 'number')
+              .sort((a, b) => a.id.localeCompare(b.id)),
           ]
           break
         case 'ascendingName':

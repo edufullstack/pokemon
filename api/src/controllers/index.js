@@ -210,8 +210,7 @@ const postPokemon = async (
 // //////////////////- TYPE -///////////////////////
 const getTypes = async () => {
   let typesApiURL = await axios.get('https://pokeapi.co/api/v2/type')
-  // Del array obtenido, dentro de results(.data.results) tenemos un array de objetos con nombre y url,
-  // mapeamos y por cada item, si no lo encuentra en la DB lo creara
+
   typesApiURL.data.results.map((item) =>
     Type.findOrCreate({
       where: {

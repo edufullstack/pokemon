@@ -15,7 +15,7 @@ const NavBar = () => {
   return (
     <div className={styles.navBody}>
       <Link to='/'>
-        <button>Logout</button>
+        <button onClick={() => handleClick()}>Logout</button>
       </Link>
       <Link to='/home'>
         <button onClick={() => handleClick()}>Home</button>

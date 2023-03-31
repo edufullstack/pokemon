@@ -58,6 +58,7 @@ const HomePage = () => {
     setCurrentPage(1)
     dispatch(setButtons([]))
     setTypeFilter('all')
+    setOrder('id')
     setOrigin(event.target.value)
     dispatch(filterPokemonsOrigin(event.target.value))
   }
